@@ -1,0 +1,15 @@
+q [= 0 0 0 0 0 0 ']
+echo off
+robot=load_robot('abb', 'IRB140'); %Load robot
+drawrobot3d(robot, q) %Draw the robot
+adjust_view(robot);
+fprintf('\nNOW LOAD AUXILIAR EQUIPMENT')
+robot.equipment{1}=load_robot('equipment', 'bumper_cutting'); %Load the Auxiliary Equipment
+drawrobot3d(robot, q) % Draw the Auxiliary Equipment
+robot.tool=load_robot('equipment/end_tools', 'parallel_gripper_0'); % Load a gripper
+drawrobot3d(robot, q) % Draw the gripper
+robot.tool_activated=1;
+drawrobot3d(robot,q) %Draw the gripper
+robot.tool=load_robot('equipment/end_tools', 'vacuum_2'); % A different tool
+drawrobot3d(robot,q);
+teach
